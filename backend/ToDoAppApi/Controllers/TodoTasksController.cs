@@ -23,6 +23,27 @@ namespace ToDoAppApi.Controllers
             return await _context.TodoTask.ToListAsync();
         }
 
+        // GET: api/GetCompletedToDoTasks
+        [HttpGet("GetCompletedToDoTasks")]
+        public async Task<ActionResult<IEnumerable<TodoTask>>> GetCompletedToDoTasks()
+        {
+            return await _context.TodoTask
+                .Where(t => t.IsCompleted)
+                .Take(5)  
+                .ToListAsync();
+        }
+
+        // GET: api/GetNotCompletedToDoTasks
+        [HttpGet("GetNotCompletedToDoTasks")]
+        public async Task<ActionResult<IEnumerable<TodoTask>>> GetNotCompletedToDoTasks()
+        {
+            return await _context.TodoTask
+                .Where(t => t.IsCompleted == false)
+                .Take(5)  
+                .ToListAsync();
+        }
+
+
         // GET: api/GetToDoTask/{id}
         [HttpGet("GetToDoTask/{id}")]
         public async Task<ActionResult<TodoTask>> GetToDoTask(int id)

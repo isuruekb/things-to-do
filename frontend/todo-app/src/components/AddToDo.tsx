@@ -39,32 +39,32 @@ const AddToDo: React.FC<AddToDoProps> = ({ setTasks }) => {
 
     return (
         <form
-            onSubmit={handleSubmit}
-            className="mb-6 space-y-4"
-        >
-            <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Task Title"
-                required
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Task Description"
-                required
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button
-                type="submit"
-                className="w-full p-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-                Add Task
-            </button>
-        </form>
+    onSubmit={handleSubmit}
+    className="mb-6 space-y-4"
+>
+    <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Task Title"
+        required
+        className="w-full p-3 bg-white text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-500"
+    />
+    <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Task Description"
+        required
+        className="w-full p-3 bg-white text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-500"
+    />
+    <button
+        type="submit"
+        className="w-full p-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+        Add Task
+    </button>
+</form>
+
 
     );
 };
