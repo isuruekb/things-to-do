@@ -14,15 +14,16 @@ interface ToDoTask {
 const ToDoList: React.FC = () => {
     const [tasks, setTasks] = useState<ToDoTask[]>([]);
     const [showCompletedTasks, setShowCompletedTasks] = useState(false);
-  
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    
     useEffect(() => {
         handleGetList();
       }, [showCompletedTasks]);
       
     const handleGetList = () => {
-        const url = showCompletedTasks
-        ? 'https://localhost:7000/api/TodoTasks/GetCompletedToDoTasks'
-        : 'https://localhost:7000/api/TodoTasks/GetNotCompletedToDoTasks';
+      const url = showCompletedTasks
+      ? `${apiUrl}/api/TodoTasks/GetCompletedToDoTasks`
+      : `${apiUrl}/api/TodoTasks/GetNotCompletedToDoTasks`;
     
       axios
         .get(url)
@@ -34,7 +35,7 @@ const ToDoList: React.FC = () => {
   
     const handleDelete = (id: number) => {
       axios
-        .delete(`https://localhost:7000/api/TodoTasks/RemoveToDoTask/${id}`)
+        .delete(`${apiUrl}/api/TodoTasks/RemoveToDoTask/${id}`)
         .then(() => {
           setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id)); // Update state to remove the task immediately
           handleGetList();
@@ -47,7 +48,7 @@ const ToDoList: React.FC = () => {
     const handleCompletionToggle = (task: ToDoTask) => {
       const updatedTask = { ...task, isCompleted: !task.isCompleted };
       axios
-        .put(`https://localhost:7000/api/TodoTasks/EditToDoTask/${task.id}`, updatedTask)
+        .put(`${apiUrl}/api/TodoTasks/EditToDoTask/${task.id}`, updatedTask)
         .then(() => {
           setTasks((prevTasks) =>
             prevTasks.map((t) => (t.id === task.id ? updatedTask : t))

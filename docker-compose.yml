@@ -1,46 +1,50 @@
 version: "3.8"
+
 services:
   frontend:
     build:
-      context: ./frontend/todo-app  
+      context: ./frontend/todo-app
       dockerfile: Dockerfile
     container_name: todo-app-frontend
     ports:
-      - "5173:5000"  
+      - "5173:5173"
     networks:
       - app-network
     environment:
-      - VITE_API_URL=http://backend:5000/api  
+      - VITE_API_URL=http://todo-app-backend:80/api
+    depends_on:
+      - backend
 
   backend:
     build:
-      context: ./backend/ToDoAppApi  
+      context: ./backend/ToDoAppApi
       dockerfile: Dockerfile
     container_name: todo-app-backend
     ports:
-      - "5000:80"  # Expose backend port
+      - "5000:80"
     networks:
       - app-network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db;Database=ToDoAppDB;User Id=sa;Password=yourStrongPassword123;
+    depends_on:
+      - db
 
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: todo-app-db
+    container_name: sql-server-container
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=yourStrongPassword123
+      - SA_PASSWORD=${SA_PASSWORD}
+      - ACCEPT_EULA=${ACCEPT_EULA}
+      - MSSQL_PID=${MSSQL_PID}
     ports:
-      - "1433:1433"  
+      - "1433:1433"
     networks:
       - app-network
-    volumes:
-      - todo-app-db-data:/var/opt/mssql  
 
 networks:
   app-network:
     driver: bridge
 
 volumes:
-  todo-app-db-data:  
+  todo-app-db-data:

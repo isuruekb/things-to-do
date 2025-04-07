@@ -4,7 +4,8 @@ using ToDoAppApi.Database;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<MyDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+          sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

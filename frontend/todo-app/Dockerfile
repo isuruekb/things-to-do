@@ -1,24 +1,25 @@
-# Use official Node.js image as the base
+# frontend/todo-app/Dockerfile
+
 FROM node:22 AS build
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Install dependencies
+# Copy and install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the rest of your application
+# Copy .env file for Vite to use at build time
+COPY .env .env
+
+# Copy the rest of the application
 COPY . .
 
-# Build the React app
+# Build the app (Vite reads from .env here)
 RUN npm run build
 
-# Serve the app using a simple server like 'serve' or similar
+# Install serve to run the production build
 RUN npm install -g serve
 
-# Expose the port the app will run on
-EXPOSE 5000
-
-# Command to run the app
-CMD ["serve", "-s", "build", "-l", "5000"]
+# Expose port and start the server
+EXPOSE 5173
+CMD ["serve", "-s", "dist", "-l", "5173"]

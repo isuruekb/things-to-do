@@ -13,9 +13,11 @@ interface AddToDoProps {
   setTasks: React.Dispatch<React.SetStateAction<ToDoTask[]>>;
 }
 
+
 const AddToDo: React.FC<AddToDoProps> = ({ setTasks }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';  // Default to localhost in development
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,14 +30,15 @@ const AddToDo: React.FC<AddToDoProps> = ({ setTasks }) => {
             id: 0
         };
 
-        axios.post('https://localhost:7000/api/TodoTasks/CreateToDoTask', newTask)
+        axios.post(`${apiUrl}/api/TodoTasks/CreateToDoTask`, newTask)
             .then((response) => {
                 setTasks(prevTasks => [...prevTasks, response.data]);
                 setTitle('');
                 setDescription('');
             })
             .catch((error) => console.error('Error adding task:', error));
-    };
+
+            };
 
     return (
         <form
