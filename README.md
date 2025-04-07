@@ -32,18 +32,14 @@ A full-stack ToDo task management application built with:
 
 ### Environment Variables
 
-Create a `.env` file in the root directory with the following content:
+Change `.env` file in the root directory credentials with the your onces:
 
 ```env
 SA_PASSWORD=yourStrongPassword123
 ACCEPT_EULA=Y
 MSSQL_PID=Express
 ```
-and create anothor `.env` file inside the frontend folder (`frontend/todo-app`) 
 
-```env
-VITE_API_URL
-```
 ---
 
 ## Running the Application
