@@ -19,8 +19,8 @@ A full-stack ToDo task management application built with:
 
 ## Bouns Features
 - Delete tasks
-- Show Completed tasks 
-- Undo conpleted tasks 
+- Show completed tasks 
+- Undo completed tasks 
 
 ---
 
@@ -32,14 +32,18 @@ A full-stack ToDo task management application built with:
 
 ### Environment Variables
 
-Create a `.env` file in the root directory or inside the frontend folder (`frontend/todo-app`) with the following content:
+Create a `.env` file in the root directory with the following content:
 
 ```env
 SA_PASSWORD=yourStrongPassword123
 ACCEPT_EULA=Y
 MSSQL_PID=Express
 ```
+and create anothor `.env` file inside the frontend folder (`frontend/todo-app`) 
 
+```env
+VITE_API_URL
+```
 ---
 
 ## Running the Application
@@ -47,8 +51,8 @@ MSSQL_PID=Express
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/isuruekb/things-to-do.git
+cd things-to-do
 ```
 
 2. **Start all services using Docker Compose:**
