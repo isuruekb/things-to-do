@@ -66,11 +66,13 @@ This will:
 
 ## API Endpoints
 
-The backend exposes REST endpoints at `/api/tasks`, e.g.:
+The backend exposes REST endpoints at `/api/TodoTasks`, e.g.:
 
-- `GET /api/tasks` - Get last 5 non-completed tasks
-- `POST /api/tasks` - Create a new task
-- `PUT /api/tasks/{id}/complete` - Mark a task as complete
+- `GET /api/TodoTasks/GetNotCompletedToDoTasks` - Get the last 5 non-completed tasks
+- `GET /api/TodoTasks/GetCompletedToDoTasks` - Get last completed tasks
+- `DELETE /api/TodoTasks/RemoveToDoTask/${id}` - Delete task
+- `PUT /api/TodoTasks/EditToDoTask/${task.id}` - Update task status
+- `POST /api/TodoTasks/CreateToDoTask` - Create a new task
 
 ---
 
